@@ -1,4 +1,4 @@
-{% extends "network/layout.html" %}
+{% extends "network/lay.html" %}
 
 {% block body %}
 
@@ -22,9 +22,9 @@
         <div class="form-group">
             <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
+        <input class="btn btn-violet" type="submit" value="Register">
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    <div class="info">Already have an account? <a class="info_link" href="{% url 'login' %}">Log In here.</a></div>
 
 {% endblock %}

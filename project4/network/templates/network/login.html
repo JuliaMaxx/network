@@ -1,7 +1,6 @@
-{% extends "network/layout.html" %}
+{% extends "network/lay.html" %}
 
 {% block body %}
-
     <h2>Login</h2>
 
     {% if message %}
@@ -16,9 +15,9 @@
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Login">
+        <input class="btn btn-violet" type="submit" value="Login">
     </form>
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    <div class="info">Don't have an account? <a class="info_link"href="{% url 'register' %}">Register here.</a></div>
 
 {% endblock %}
