@@ -2,7 +2,7 @@
 
 {% block body %}
     <h3>All Posts</h3>
-    
+
     {% if user.is_authenticated %}
     <form class="new" action="{% url 'index' %}" method="post">
         {% csrf_token %}
@@ -12,6 +12,29 @@
     </form>
     {%endif%}
     <div class="main">
-
+        <ul class="list-group list-group-flush">
+            {% for post in posts %}
+            <li class="shadow-sm bg-body-tertiary rounded list-group-item">
+                <div style="display:flex">
+                    <div style="margin-right:15px"><img src='{{ post.user.image.url }}' alt='Profile Image' class='prof_img' style="position:static"></div>
+                    <div>
+                        <div style="display:flex">
+                            <div style="margin-right:8px"><strong>{{post.user.username}}</strong></div>
+                            <div class="text-muted">{{post.user.email}}</div>
+                        </div>
+                        <div class="text-muted" style="font-size: 13px; margin-bottom: 10px;">{{post.time}}</div>
+                        <div>{{post.text}}</div>
+                        <hr style="margin-bottom: 1px;">
+                        <div style="display:flex; cursor:pointer">
+                            <div style="margin-right:17px"><img src="static/network/heart.svg"> 0</div>
+                            <div><img src="static/network/chat-left.svg"> 0</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+                <h4>No posts yet.</h4>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

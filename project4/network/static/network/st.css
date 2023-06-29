@@ -145,10 +145,6 @@
     padding: 0px 10px;
     font-family: "Roboto";
   }
-.main{
-  background-color: rgb(245, 245, 245);
-}
-
 /* icons */
 .icon, .twit{
   margin-right: 13px;
@@ -164,4 +160,11 @@
   position:absolute;
   left:20px;
   top:10px;
+}
+
+
+
+/* lists */
+.list-group-item{
+  margin-bottom: 10px;
 }
