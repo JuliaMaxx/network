@@ -3,10 +3,10 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    image = models.ImageField(upload_to='profile_images/', default='profile_images/default-avatar.jpg')
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     text = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
 

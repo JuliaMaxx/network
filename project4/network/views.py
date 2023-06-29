@@ -3,7 +3,6 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-
 from .models import User
 
 
@@ -40,6 +39,8 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
+        if request.FILES['image']:
+            image = request.FILES["image"]
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -52,6 +53,8 @@ def register(request):
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
+            if image:
+                user.image = image
             user.save()
         except IntegrityError:
             return render(request, "network/register.html", {

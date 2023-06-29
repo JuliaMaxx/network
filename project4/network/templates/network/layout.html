@@ -5,45 +5,35 @@
     <head>
         <title>{% block title %}Social Network{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'network/styl.css' %}" rel="stylesheet">
     </head>
     <body>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Network</a>
-          
-            <div>
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><strong>{{ user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Following</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
-        
-        <div class="body">
-            {% block body %}
-            {% endblock %}
+      <div class="navigation_bar shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+        <div>
+          <div class="header">
+            <img class="twit" src="{% static 'network/twitter.svg' %}">
+            <strong class="brand">Network</strong>
+          </div>
+              <a  href="{% url 'index' %}" class="n_link"><img class="icon" src="{% static 'network/house-heart-fill.svg' %}">All Posts</a>
+            {% if user.is_authenticated %}
+              <a href="#" class="n_link"><img class="icon" src="{% static 'network/hash.svg' %}">Following</a>
+              <a href="#" class="n_link"><img class="icon" src="{% static 'network/person-fill.svg' %}">Profile</a>
         </div>
+        <div>
+            <hr>
+              <div class="user"><strong>Logged in as {{ user.username }}</strong></div>
+              <a href="{% url 'logout' %}"><button>Log out</button></a>
+            {% else %}
+              <a href="{% url 'login' %}" class="n_link"><img class="icon" src="{% static 'network/door-open-fill.svg' %}">Log in</a>
+              <a href="{% url 'register' %}" class="n_link"><img class="icon" src="{% static 'network/person-fill-add.svg' %}">Register</a>
+            {% endif %}
+            <hr>
+        </div>
+      </div>
+      
+      <div class="body">
+          {% block body %}
+          {% endblock %}
+      </div>
     </body>
 </html>
