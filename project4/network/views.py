@@ -76,7 +76,6 @@ def register(request):
     else:
         return render(request, "network/register.html")
     
-
 def profile(request, profile_id):
     user = User.objects.get(pk=profile_id)
     if request.method == 'GET':
@@ -91,3 +90,13 @@ def profile(request, profile_id):
             user.followers.remove(request.user)
             user.save()
         return HttpResponseRedirect(reverse("profile", args=(user.id, )))
+    
+@login_required
+def following(request, profile_id):
+    user = User.objects.get(pk=profile_id)
+    following = user.following.all()
+    posts = []
+    for followed_user in following:
+       posts += followed_user.posts.order_by('-time')
+
+    return render (request, "network/following.html", {"posts":posts})

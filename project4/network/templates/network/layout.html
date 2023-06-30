@@ -16,7 +16,7 @@
           </div>
               <a  href="{% url 'index' %}" class="n_link"><img class="icon" src="{% static 'network/house-heart-fill.svg' %}">All Posts</a>
             {% if user.is_authenticated %}
-              <a href="#" class="n_link"><img class="icon" src="{% static 'network/hash.svg' %}">Following</a>
+              <a href="{% url 'following' user.id%}" class="n_link"><img class="icon" src="{% static 'network/hash.svg' %}">Following</a>
               <a href="{% url 'profile' user.id %}" class="n_link"><img class="icon" src="{% static 'network/person-fill.svg' %}">Profile</a>
         </div>
         <div>
