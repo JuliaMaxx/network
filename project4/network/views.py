@@ -79,6 +79,15 @@ def register(request):
 
 def profile(request, profile_id):
     user = User.objects.get(pk=profile_id)
-    return render(request, "network/profile.html", {
-        "user1":user
-    })
+    if request.method == 'GET':
+        return render(request, "network/profile.html", {
+            "user1":user
+        })
+    else:
+        if request.POST['followers'] == 'follow':
+            user.followers.add(request.user)
+            user.save()
+        else:
+            user.followers.remove(request.user)
+            user.save()
+        return HttpResponseRedirect(reverse("profile", args=(user.id, )))
