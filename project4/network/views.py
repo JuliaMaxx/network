@@ -81,7 +81,7 @@ def profile(request, profile_id):
     user = User.objects.get(pk=profile_id)
     if request.method == 'GET':
         return render(request, "network/profile.html", {
-            "user1":user
+            "user1":user, "posts": user.posts.order_by('-time')
         })
     else:
         if request.POST['followers'] == 'follow':
