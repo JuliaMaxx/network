@@ -1,0 +1,48 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h4><strong>{{user1.username}}</strong></h4>
+    <hr style="margin-bottom:0px">
+    <div class="box">
+        <img src='{{ user1.image.url }}' alt='Profile Image' class='p_img'>   
+    </div>
+    <div class="box2">
+        {% if user.is_authenticated %}
+            {% if user != user1 %}
+                <form>
+                    {% csrf_token %}
+                    <input type="hidden">
+                    {% if user in user1.followers.all %}
+                        <button class="post follow" style="width: 150px !important;">Unfollow</button>
+                    {% else %} 
+                        <button class="post follow">Follow</button>
+                    {% endif %}  
+                </form>
+            {% endif %}
+        {% endif %}
+        <div><strong>{{user1.username}}</strong></div>
+        <div class="text-muted">{{user1.email}}</div>
+        <div class="text-muted" style="margin: 10px 0px; font-size: 19px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray" class="bi bi-calendar3" viewBox="0 0 16 16">
+                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+            Joined: {{user1.date_joined.date}}
+        </div>
+        <div class="text-muted" style="font-size: 19px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray" class="bi bi-clock" viewBox="0 0 16 16">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg>
+            Last online: {{user1.last_login}}
+        </div>
+        <div style="display: flex; margin-top: 20px">
+            <div class="information"><div class="text-muted">Posts</div><strong>{{user1.posts.all.count}}</strong></div>
+            <div class="line"></div>
+            <div class="information"><div class="text-muted">Followers</div><strong>{{user1.followers.count}}</strong></div>
+            <div class="line"></div>
+            <div class="information"><div class="text-muted">Following</div><strong>{{user1.following.count}}</strong></div>
+            </div>
+    </div>
+    
+{% endblock %}

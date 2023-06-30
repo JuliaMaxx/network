@@ -1,6 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+<div class="space">
     <h3>All Posts</h3>
 
     {% if user.is_authenticated %}
@@ -19,14 +20,17 @@
                     <div style="margin-right:15px"><img src='{{ post.user.image.url }}' alt='Profile Image' class='prof_img' style="position:static"></div>
                     <div>
                         <div style="display:flex">
-                            <div style="margin-right:8px"><strong>{{post.user.username}}</strong></div>
+                            <a href="{% url 'profile' post.user.id %}" class="p_link"><div style="margin-right:8px"><strong>{{post.user.username}}</strong></div></a>
                             <div class="text-muted">{{post.user.email}}</div>
                         </div>
                         <div class="text-muted" style="font-size: 13px; margin-bottom: 10px;">{{post.time}}</div>
                         <div>{{post.text}}</div>
                         <hr style="margin-bottom: 1px;">
                         <div style="display:flex; cursor:pointer">
-                            <div style="margin-right:17px"><img src="static/network/heart.svg"> 0</div>
+                            <div class="like" style="margin-right:17px">
+                                <img class="like_img"src="static/network/heart.svg">
+                                <div style="display: inline-block;" id="num">0</div>
+                            </div>
                             <div><img src="static/network/chat-left.svg"> 0</div>
                         </div>
                     </div>
@@ -37,4 +41,5 @@
             {% endfor %}
         </ul>
     </div>
+</div>
 {% endblock %}

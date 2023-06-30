@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import User, Post
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -17,6 +18,7 @@ def index(request):
         new_post = Post(user=request.user, text=post)
         new_post.save()
         return HttpResponseRedirect(reverse("index"))
+
 
 
 def login_view(request):
@@ -73,3 +75,10 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+    
+
+def profile(request, profile_id):
+    user = User.objects.get(pk=profile_id)
+    return render(request, "network/profile.html", {
+        "user1":user
+    })

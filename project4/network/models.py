@@ -3,6 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    followers = models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
     image = models.ImageField(upload_to='profile_images/', default='profile_images/default-avatar.jpg')
 
 class Post(models.Model):

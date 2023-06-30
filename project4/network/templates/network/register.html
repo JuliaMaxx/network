@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-
+<div class="space">
     <h2>Register</h2>
 
     {% if message %}
@@ -27,5 +27,5 @@
     </form>
 
     <div class="info">Already have an account? <a class="info_link" href="{% url 'login' %}">Log In here.</a></div>
-
+</div>
 {% endblock %}

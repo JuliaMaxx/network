@@ -31,6 +31,14 @@
   }
 
 /* links */
+.p_link{
+  color:#513575;
+  transition: color 0.2s
+}
+.p_link:hover{
+  color:#AA6FF6;
+  text-decoration: none;
+}
 .n_link, .info_link {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -52,6 +60,9 @@
   /* text */
   h3{
     padding-bottom: 10px;
+  }
+  h4{
+    margin: 8px 0px 5px 15px
   }
   .user{
     color:#51357580;
@@ -117,6 +128,10 @@
     right:15px;
     bottom: 60px;
   }
+  .follow{
+    right: 70px;
+    bottom: 130px
+  }
   .btn-violet{
     width: 50% !important;
   }
@@ -139,16 +154,20 @@
 
   /* page content */
 .body {
-    margin-top: 30px;
-    margin-left: 260px;
-    margin-right: 20px;
-    padding: 0px 10px;
+    margin-left: 240px;
     font-family: "Roboto";
   }
+.space{
+  margin: 30px 20px 0px 20px;
+  padding: 0px 10px;
+}
 /* icons */
 .icon, .twit{
   margin-right: 13px;
   padding-bottom: 5px;
+}
+body{
+  margin:0px 0px 0px 0px;
 }
 
 
@@ -161,10 +180,45 @@
   left:20px;
   top:10px;
 }
+.p_img{
+  border-radius: 50%;
+  width: 150px;
+  height:150px;
+  border: 5px solid white;
+  position:absolute;
+  left: 50px;
+  top: 120px;
+}
 
 
 
 /* lists */
 .list-group-item{
   margin-bottom: 10px;
+}
+
+/* box */
+.box{
+  position:relative;
+  background-color: #bea4e0;
+  width:100%;
+  height: 200px;
+}
+.box2{
+  position: relative;
+  font-size: 21px;
+  padding: 70px 0px 0px 30px;
+  height: 200px;
+}
+
+.line{
+  width:1px;
+  height: 60px;
+  border-left: 1.5px solid rgb(209, 209, 209);
+  margin: 0px 8px;
+}
+.information{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
