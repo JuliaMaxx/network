@@ -68,6 +68,9 @@
     color:#51357580;
     margin-left: 8px;
   }
+  .username{
+    margin-right:8px;
+  }
   h2, .info{
     text-align: center;
     margin-bottom: 20px;
@@ -75,6 +78,17 @@
   .info{
     margin-top:20px;
     font-weight: 600;
+  }
+  .time{
+    font-size: 13px;
+     margin-bottom: 10px;
+  }
+  .joined{
+    margin: 10px 0px;
+   
+  }
+  .last_online, .joined{
+    font-size: 19px;
   }
 
   /* forms */
@@ -161,6 +175,8 @@
   margin: 30px 20px 0px 20px;
   padding: 0px 10px;
 }
+
+
 /* icons */
 .icon, .twit{
   margin-right: 13px;
@@ -180,6 +196,9 @@ body{
   left:20px;
   top:10px;
 }
+.prof_img_div{
+  margin-right:15px;
+}
 .p_img{
   border-radius: 50%;
   width: 150px;
@@ -188,6 +207,9 @@ body{
   position:absolute;
   left: 50px;
   top: 120px;
+}
+.like{
+  margin-right:17px
 }
 
 
@@ -211,6 +233,9 @@ body{
   height: 200px;
   margin-bottom: 150px;
 }
+.stats{
+  margin-top: 20px
+}
 
 .line{
   width:1px;
@@ -225,4 +250,27 @@ body{
 }
 .posts{
   margin: 0px 20px;
+}
+
+
+/* hrs */
+.hr1{
+  margin-bottom: 1px;
+}
+.hr2{
+  margin-bottom: 0px;
+}
+
+
+/* flex */
+.fx{
+  display:flex;
+}
+.pointer{
+  cursor:pointer
+}
+
+/* inline block */
+.ilbk{
+  display: inline-block;
 }

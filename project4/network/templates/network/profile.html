@@ -2,7 +2,7 @@
 
 {% block body %}
     <h4><strong>{{user1.username}}</strong></h4>
-    <hr style="margin-bottom:0px">
+    <hr class="hr2">
     <div class="box">
         <img src='{{ user1.image.url }}' alt='Profile Image' class='p_img'>   
     </div>
@@ -23,21 +23,21 @@
         {% endif %}
         <div><strong>{{user1.username}}</strong></div>
         <div class="text-muted">{{user1.email}}</div>
-        <div class="text-muted" style="margin: 10px 0px; font-size: 19px;">
+        <div class="joined text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray" class="bi bi-calendar3" viewBox="0 0 16 16">
                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
             </svg>
             Joined: {{user1.date_joined.date}}
         </div>
-        <div class="text-muted" style="font-size: 19px;">
+        <div class="last_online text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray" class="bi bi-clock" viewBox="0 0 16 16">
                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
             </svg>
             Last online: {{user1.last_login}}
         </div>
-        <div style="display: flex; margin-top: 20px">
+        <div class="fx stats">
             <div class="information"><div class="text-muted">Posts</div><strong>{{user1.posts.all.count}}</strong></div>
             <div class="line"></div>
             <div class="information"><div class="text-muted">Followers</div><strong>{{user1.followers.count}}</strong></div>
@@ -48,22 +48,22 @@
     <ul class="posts list-group list-group-flush">
         {% for post in posts %}
         <li class="shadow-sm bg-body-tertiary rounded list-group-item">
-            <div style="display:flex">
-                <div style="margin-right:15px"><img src='{{ post.user.image.url }}' alt='Profile Image' class='prof_img' style="position:static"></div>
+            <div class="fx">
+                <div class="prof_img_div"><img src='{{ post.user.image.url }}' alt='Profile Image' class='prof_img' style="position:static"></div>
                 <div>
-                    <div style="display:flex">
-                        <a href="{% url 'profile' post.user.id %}" class="p_link"><div style="margin-right:8px"><strong>{{post.user.username}}</strong></div></a>
+                    <div class="fx">
+                        <a href="{% url 'profile' post.user.id %}" class="p_link"><div class="username"><strong>{{post.user.username}}</strong></div></a>
                         <div class="text-muted">{{post.user.email}}</div>
                     </div>
-                    <div class="text-muted" style="font-size: 13px; margin-bottom: 10px;">{{post.time}}</div>
+                    <div class="time text-muted">{{post.time}}</div>
                     <div>{{post.text}}</div>
-                    <hr style="margin-bottom: 1px;">
-                    <div style="display:flex; cursor:pointer">
-                        <div class="like" style="margin-right:17px">
+                    <hr class="hr1">
+                    <div class="fx pointer">
+                        <div class="like">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gray" class="bi bi-heart" viewBox="0 0 16 16">
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                             </svg>
-                            <div style="display: inline-block;" id="num">0</div>
+                            <div class="ilbk" id="num">0</div>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gray" class="bi bi-chat-left" viewBox="0 0 16 16">
