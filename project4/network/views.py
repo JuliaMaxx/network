@@ -6,6 +6,9 @@ from django.urls import reverse
 from .models import User, Post
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 
 
 def index(request):
@@ -18,15 +21,18 @@ def index(request):
         post = request.POST['post']
         new_post = Post(user=request.user, text=post)
         new_post.save()
-    else:
-        edited = request.POST.get('edit', '')
-        id = request.POST.get('pk', '')
-        post = Post.objects.get(pk=id)
-        post.text = edited
-        post.save()
     return HttpResponseRedirect(reverse("index"))
 
-
+@csrf_exempt
+@login_required
+def edit(request):
+    data = json.loads(request.body)
+    text = data.get('edited', '')
+    pk = data.get('id', '')
+    post = Post.objects.get(pk=pk)
+    post.text = text
+    post.save()
+    return JsonResponse({"message": "Post edited successfully."}, status=201)
 
 def login_view(request):
     if request.method == "POST":
