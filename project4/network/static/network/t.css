@@ -87,6 +87,9 @@
     margin: 10px 0px;
    
   }
+  .post_content{
+    width:75%
+  }
   .last_online, .joined{
     font-size: 19px;
   }
