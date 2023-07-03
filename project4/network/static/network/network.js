@@ -10,11 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 contents.forEach((content) => {
                     if (content.dataset.id === button.dataset.id){
-                        content.innerHTML = `
-                            <input class="input_edit" name="edit" type="textarea" autofocus autocomplete="off" value=" ${content.dataset.content}">`;
-                        const inputEdit = content.querySelector('.input_edit');
-                        inputEdit.focus();
-                        
+                        let val = '';
+                        fetch(`/edited/${content.dataset.id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            val = data.text;
+                            content.innerHTML = `
+                                <input class="input_edit" name="edit" type="textarea" autofocus autocomplete="off" value="${val}">`;
+                            const inputEdit = content.querySelector('.input_edit');
+                            inputEdit.focus();
+                        });       
                     }
                 })
             }
@@ -36,8 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
                           .then(result => {
                             // Print the result in case of any errors
                             console.log(result);
-                          });    
-                        content.innerHTML = edited;
+                          });
+                          fetch(`/edited/${id}`)
+                            .then(response => response.json())
+                            .then(data => {
+                            console.log(data);
+                                content.innerHTML = data.text;
+                            })      
                     }
                 })
             }

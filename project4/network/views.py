@@ -26,13 +26,19 @@ def index(request):
 @csrf_exempt
 @login_required
 def edit(request):
-    data = json.loads(request.body)
-    text = data.get('edited', '')
-    pk = data.get('id', '')
-    post = Post.objects.get(pk=pk)
-    post.text = text
-    post.save()
-    return JsonResponse({"message": "Post edited successfully."}, status=201)
+    if request.method == "POST":
+        data = json.loads(request.body)
+        text = data.get('edited', '')
+        pk = data.get('id', '')
+        post = Post.objects.get(pk=pk)
+        post.text = text
+        post.save()
+        return JsonResponse({"message": "Post edited successfully."}, status=201)
+
+def edited(request, id):
+    post = Post.objects.get(pk=id)
+    data = {'text':post.text}
+    return JsonResponse(data, safe=False)
 
 def login_view(request):
     if request.method == "POST":
