@@ -101,9 +101,13 @@ def register(request):
     
 def profile(request, profile_id):
     user = User.objects.get(pk=profile_id)
+    posts = user.posts.order_by('-time')
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     if request.method == 'GET':
         return render(request, "network/profile.html", {
-            "user1":user, "posts": user.posts.order_by('-time')
+            "user1":user, "posts": page_obj
         })
     else:
         if request.POST['followers'] == 'follow':
@@ -121,5 +125,7 @@ def following(request, profile_id):
     posts = []
     for followed_user in following:
        posts += followed_user.posts.order_by('-time')
-
-    return render (request, "network/following.html", {"posts":posts})
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render (request, "network/following.html", {"posts":page_obj})
