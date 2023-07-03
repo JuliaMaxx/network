@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from .models import User, Post
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -13,11 +14,17 @@ def index(request):
         return render(request, "network/index.html", {
             "posts": posts.order_by('-time')
         })
-    else:
+    elif 'post' in request.POST:
         post = request.POST['post']
         new_post = Post(user=request.user, text=post)
         new_post.save()
-        return HttpResponseRedirect(reverse("index"))
+    else:
+        edited = request.POST.get('edit', '')
+        id = request.POST.get('pk', '')
+        post = Post.objects.get(pk=id)
+        post.text = edited
+        post.save()
+    return HttpResponseRedirect(reverse("index"))
 
 
 

@@ -18,13 +18,18 @@
             <li class="shadow-sm bg-body-tertiary rounded list-group-item">
                 <div class="fx">
                     <div class="prof_img_div"><img src='{{ post.user.image.url }}' alt='Profile Image' class='prof_img' style="position:static"></div>
-                    <div>
-                        <div class="fx">
-                            <a href="{% url 'profile' post.user.id %}" class="p_link"><div class="username"><strong>{{post.user.username}}</strong></div></a>
-                            <div class="text-muted">{{post.user.email}}</div>
+                    <div class="user_content">
+                        <div class="fx between">
+                            <div class="fx">
+                                <a href="{% url 'profile' post.user.id %}" class="p_link"><div class="username"><strong>{{post.user.username}}</strong></div></a>
+                                <div class="text-muted">{{post.user.email}}</div>
+                            </div>
+                            {% if user == post.user %}
+                            <div><button class="edit" data-id="{{post.id}}">Edit</button></div>
+                            {% endif %}
                         </div>
                         <div class="time text-muted">{{post.time}}</div>
-                        <div>{{post.text}}</div>
+                        <div class="post_content" data-content="{{post.text}}" data-id="{{post.id}}">{{post.text}}</div>
                         <hr class="hr1">
                         <div class="fx pointer">
                             <div class="like">
@@ -41,5 +46,41 @@
             {% endfor %}
         </ul>
     </div>
+    <script>
+        const buttons = document.querySelectorAll('.edit');
+        const contents = document.querySelectorAll('.post_content');
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                if (button.innerHTML === 'Edit'){
+                    button.innerHTML = 'Save';
+                    contents.forEach((content) => {
+                        if (content.dataset.id === button.dataset.id){
+                            content.innerHTML = `
+                            <form class="edit_form" action="{% url 'index' %}" method="post" id='form1'>
+                                {% csrf_token %}
+                                <input type="hidden" value="${content.dataset.id}" name="pk">
+                                <input class="input_edit" name="edit" type="textarea" autofocus autocomplete="off" value=" ${content.dataset.content}">
+                                <button type="submit" style="display: none;"></button>
+                            </form>`;
+                            const inputEdit = content.querySelector('.input_edit');
+                            inputEdit.focus();
+                            
+                        }
+                    })
+                }
+                else{
+                    const form = document.getElementById('form1');
+                    form.querySelector('button[type="submit"]').click();
+                    button.innerHTML = 'Edit';
+                    contents.forEach((content) => {
+                        if (content.dataset.id === button.dataset.id){  
+                            const inputEdit = content.querySelector('.input_edit');
+                            content.innerHTML = inputEdit.value;
+                        }
+                    })
+                }
+            })
+        })
+    </script>
 </div>
 {% endblock %}
