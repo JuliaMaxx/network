@@ -49,4 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }     
         })
     })
+
+    document.querySelectorAll('.bi-chat-left-fill').forEach((chat) => {
+        chat.addEventListener('click', () => {
+            const fill = chat.getAttribute('fill');
+            console.log(fill);
+            if (fill === 'rgb(209, 209, 209)'){
+                chat.setAttribute('fill', 'rgb(0, 140, 255)');
+                chat.parentElement.parentElement.querySelector('.num_comments').innerHTML = 1;
+            }
+            else{
+                chat.setAttribute('fill', 'rgb(209, 209, 209)');
+                chat.parentElement.parentElement.querySelector('.num_comments').innerHTML = 0;
+            }
+        })
+    })
 })

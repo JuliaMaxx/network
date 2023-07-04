@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
                           })
                           .then(response => response.json())
                           .then(result => {
-                            // Print the result in case of any errors
                             console.log(result);
                           });
                           fetch(`/edited/${id}`)
