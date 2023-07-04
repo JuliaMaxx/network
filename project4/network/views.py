@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User, Post
+from .models import User, Post, Like
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
@@ -42,6 +42,12 @@ def edit(request):
 def edited(request, id):
     post = Post.objects.get(pk=id)
     data = {'text':post.text}
+    return JsonResponse(data, safe=False)
+
+def likes(request, id):
+    post = Post.objects.get(pk=id)
+    likes = post.likes.count()
+    data = {'likes':likes}
     return JsonResponse(data, safe=False)
 
 def login_view(request):
