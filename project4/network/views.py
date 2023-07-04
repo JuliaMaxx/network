@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from itertools import chain
 
 
 def index(request):
@@ -169,9 +170,7 @@ def following(request, profile_id):
     # get all the followed users
     following = user.following.all()
     # get all the posts in the reverse-chronological order
-    posts = []
-    for followed_user in following:
-       posts += followed_user.posts.order_by('-time')
+    posts = Post.objects.filter(user__in=following).order_by('-time')
     # set up paginator
     paginator = Paginator(posts, 10)
     # get the page number from url
