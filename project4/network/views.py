@@ -57,6 +57,10 @@ def likes(request, id, user_id):
         likes = post.likes.count()
         data = {'likes':likes, 'liked':liked}
         return JsonResponse(data, safe=False)
+    elif request.method == 'PUT':
+        like = Like.objects.filter(user=user, post=post)
+        like.delete()
+        return JsonResponse({"message": "Like removed successfully."}, status=201)
     else:
         like = Like(user=user, post=post)
         like.save()
