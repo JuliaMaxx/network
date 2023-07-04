@@ -44,10 +44,16 @@ def edited(request, id):
     data = {'text':post.text}
     return JsonResponse(data, safe=False)
 
-def likes(request, id):
+def likes(request, id, user_id):
+    user = User.objects.get(pk=user_id)
     post = Post.objects.get(pk=id)
+    liked = False
+    for like in user.liked.all():
+        if post == like.post:
+            liked = True
+            break
     likes = post.likes.count()
-    data = {'likes':likes}
+    data = {'likes':likes, 'liked':liked}
     return JsonResponse(data, safe=False)
 
 def login_view(request):
