@@ -1,4 +1,4 @@
-# CS50W Project 4: Network
+# Network
 ## Video Demo: https://www.youtube.com/watch?v=U0A9ARZ6bSU
 ![Screenshot (19)](https://github.com/JuliaMaxy/project4/assets/121096183/b307bf23-c22c-4c34-973a-17f5f7a4a99f)
 ## Description:
